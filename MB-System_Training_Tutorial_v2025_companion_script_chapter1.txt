@@ -1,0 +1,40 @@
+#
+# Companion script for the MB-System Training Tutorial version 2025
+# by the MB-System Dev Team (Dave Caress (MBARI), Jenny Paduan (MBARI) 
+# and Christian Ferreira (MARUM)) with Evgenia Bazhenova (MARUM)
+# Bremen, June, 25th, 2025.
+#
+# Get datalist of the logged swath files using (.ALL format, mb58)
+#
+mbm_makedatalist -S.all -Odatalist_raw.mb-1
+#
+# Create an MB-System platform file (.pfl)
+#
+mbmakeplatform --swath=datalist_raw.mb-1 --verbose --output=Meteor_EM122.plf
+# 
+# Preprocess the data - merge asynchronous data (position, depth, heading, attitude)
+# from navigation post processing
+#
+mbpreprocess --input=datalist_raw.mb-1 --verbose --platform-file=Meteor_EM122.plf
+#
+# Get datalist of raw *.mb261 files
+mbm_makedatalist -S.mb59 -P -V
+mbdatalist -Z
+#
+# Process the data and apply tide correction
+mbprocess
+#
+# Create a bathymetry grid
+mbgrid -A2 -N -I datalistp.mb-1 -F5 -E75/75m! -OMeteor_M86-1C_75m_bathy_F5
+#
+# Create a amplitude/backscatter grid
+mbgrid -A3 -N -I datalistp.mb-1 -F1 -E75/75m! -OMeteor_M86-1C_75m_amplitude_F1
+#
+# Create a sidescan grid
+mbgrid -A4 -N -I datalistp.mb-1 -F1 -E75/75m! -OMeteor_M86-1C_75m_sidescan_F1
+#
+# Plot the bathymetry grid
+mbm_grdplot -G2 -I Meteor_M86-1C_75m_bathy_F5.grd
+#
+# Run the script to generate the plot
+bash Meteor_M86-1C_75m_bathy_F5.grd.cmd
