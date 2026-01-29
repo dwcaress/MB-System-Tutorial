@@ -17,7 +17,7 @@ mbmakeplatform --swath=datalist_raw.mb-1 --verbose --output=Meteor_EM122.plf
 #
 mbpreprocess --input=datalist_raw.mb-1 --verbose --platform-file=Meteor_EM122.plf
 #
-# Get datalist of raw *.mb261 files
+# Get datalist of raw *.mb59 files
 mbm_makedatalist -S.mb59 -P -V
 mbdatalist -Z
 #
