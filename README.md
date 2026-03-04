@@ -7,7 +7,7 @@ To help users without a Linux/Mac computer or for those who are limited in modif
 https://doi.org/10.5281/zenodo.17995170 * normally the recommended version for Windows users
 
 (ARM64/Apple Silicon)
-https://doi.org/10.5281/zenodo.17995170
+https://doi.org/10.5281/zenodo.17987062
 
 To run those, people must download and install VirtualBox, download the VM (both the .vdi and .vbox files) that matches their computer, open the VirtualBox, select "Open" and choose the .vbox file to import it, and after the VM is ready, press "start". 
 
